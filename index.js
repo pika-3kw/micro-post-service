@@ -2,6 +2,7 @@ const express = require("express");
 const { randomBytes } = require("crypto");
 const cors = require("cors");
 const fs = require("fs");
+const axios = require("axios");
 
 const app = express();
 
@@ -28,7 +29,19 @@ app.post("/posts", (req, res) => {
 
   posts.push(post);
 
+  axios.post("http://localhost:4000/events", {
+    type: "PostCreated",
+    data: post,
+  });
+
   res.status(200).json(post);
+});
+
+app.post("/events", (req, res) => {
+  const data = req.body;
+  console.log("Received Event:", data.type);
+
+  res.json({});
 });
 
 app.listen(4001, () => {
