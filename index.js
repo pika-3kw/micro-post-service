@@ -13,6 +13,10 @@ app.use(express.urlencoded({ extended: false }));
 
 let posts = [];
 
+app.get(/^\/$/, (req, res) => {
+  res.send("Post Service");
+});
+
 app.get("/posts", (req, res) => {
   res.json(posts);
 });
