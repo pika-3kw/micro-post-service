@@ -33,7 +33,7 @@ app.post("/posts", (req, res) => {
 
   posts.push(post);
 
-  axios.post("http://localhost:4000/events", {
+  axios.post("http://event-bus-srv:4000/events", {
     type: "PostCreated",
     data: post,
   });
